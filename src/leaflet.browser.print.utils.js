@@ -58,7 +58,7 @@ L.BrowserPrint.Utils = {
         return layers;
     },
 
-    initialize: function (customRenderers) {
+    initialize: function (customRenderers, customLayers) {
         this._knownRenderers = {};
 
         // Renderers
@@ -138,29 +138,6 @@ L.BrowserPrint.Utils = {
             );
         });
 
-        // MultiPolyline is removed in leaflet 1.0.0
-        this.registerLayer(
-            L.MultiPolyline,
-            "L.MultiPolyline",
-            function (layer, utils) {
-                return L.polyline(
-                    layer.getLatLngs(),
-                    utils.cloneOptions(layer.options)
-                );
-            }
-        );
-        // MultiPolygon is removed in leaflet 1.0.0
-        this.registerLayer(
-            L.MultiPolygon,
-            "L.MultiPolygon",
-            function (layer, utils) {
-                return L.multiPolygon(
-                    layer.getLatLngs(),
-                    utils.cloneOptions(layer.options)
-                );
-            }
-        );
-
         this.registerLayer(L.Polyline, "L.Polyline", function (layer, utils) {
             return L.polyline(
                 layer.getLatLngs(),
@@ -181,6 +158,12 @@ L.BrowserPrint.Utils = {
         this.registerLayer(L.Tooltip, "L.Tooltip", function () {
             return null;
         });
+
+        if (customLayers) {
+            for (var l of customLayers) {
+                this.registerLayer(l.type, l.name, l.builder);
+            }
+        }
     },
 
     _register: function (array, type, identifier, builderFunction) {

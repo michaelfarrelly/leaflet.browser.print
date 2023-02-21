@@ -20,6 +20,7 @@ L.BrowserPrint = L.Class.extend({
         printFunction: window.print,
         debug: false,
         customRenderers: [],
+        customLayers: [],
     },
     initialize: function (map, options) {
         this._map = map;
@@ -268,7 +269,10 @@ L.BrowserPrint = L.Class.extend({
         if (this.options.cancelWithEsc) {
             L.DomEvent.on(document, "keyup", this._keyUpCancel, this);
         }
-        L.BrowserPrint.Utils.initialize(this.options.customRenderers);
+        L.BrowserPrint.Utils.initialize(
+            this.options.customRenderers,
+            this.options.customLayers
+        );
 
         var self = this;
         var mapContainer = this._map.getContainer();
