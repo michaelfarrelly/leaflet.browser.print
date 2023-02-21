@@ -1,6 +1,6 @@
 {
-  "name": "leaflet.browser.print",
-  "version": "2.0.2",
+  "name": "@mikefarrelly/leaflet.browser.print",
+  "version": "2.0.2-7",
   "keywords": [
     "leaflet.js",
     "browser",
@@ -9,6 +9,7 @@
     "landscape",
     "custom selection print tool"
   ],
+  "main": "./dist/leaflet.browser.print.js",
   "description": "A leaflet plugin which allows users to print the map directly from the browser",
   "homepage": "https://github.com/Igor-Vladyka/leaflet.browser.print",
   "bugs": "https://github.com/Igor-Vladyka/leaflet.browser.print/issues",
@@ -24,7 +25,7 @@
   },
   "devDependencies": {
     "leaflet": "^1.7.1",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

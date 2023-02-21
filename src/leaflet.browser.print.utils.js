@@ -58,12 +58,17 @@ L.BrowserPrint.Utils = {
         return layers;
     },
 
-    initialize: function () {
+    initialize: function (customRenderers) {
         this._knownRenderers = {};
 
         // Renderers
-        this.registerRenderer(L.SVG, "L.SVG");
-        this.registerRenderer(L.Canvas, "L.Canvas");
+        if (!customRenderers) {
+            this.registerRenderer(L.SVG, "L.SVG");
+            this.registerRenderer(L.Canvas, "L.Canvas");
+        }
+        for (var r of customRenderers) {
+            this.registerRenderer(r.type, r.name);
+        }
 
         this.registerLayer(
             L.TileLayer.WMS,

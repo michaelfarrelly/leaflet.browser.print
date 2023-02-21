@@ -19,6 +19,7 @@ L.BrowserPrint = L.Class.extend({
         cancelWithEsc: true,
         printFunction: window.print,
         debug: false,
+        customRenderers: [],
     },
     initialize: function (map, options) {
         this._map = map;
@@ -267,7 +268,7 @@ L.BrowserPrint = L.Class.extend({
         if (this.options.cancelWithEsc) {
             L.DomEvent.on(document, "keyup", this._keyUpCancel, this);
         }
-        L.BrowserPrint.Utils.initialize();
+        L.BrowserPrint.Utils.initialize(this.options.customRenderers);
 
         var self = this;
         var mapContainer = this._map.getContainer();
